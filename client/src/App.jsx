@@ -1,4 +1,5 @@
 import './App.css'
+import ListItem from './components/ListItem'
 
 function App() {
   const data = [
@@ -26,21 +27,9 @@ function App() {
     <>
       <h1>To Do List</h1>
       <ol>
-        <li>
-          <h2>{data[0].title}</h2>
-          <p>Description: {data[0].description}</p>
-          <p>Time: {data[0].time}</p>
-        </li>
-        <li>
-          <h2>{data[1].title}</h2>
-          <p>Description: {data[1].description}</p>
-          <p>Time: {data[1].time}</p>
-        </li>
-        <li>
-          <h2>{data[2].title}</h2>
-          <p>Description: {data[2].description}</p>
-          <p>Time: {data[2].time}</p>
-        </li>
+        <ListItem data={data[0]}/>
+        <ListItem data={data[1]}/>
+        <ListItem data={data[2]}/>
       </ol>
     </>
   )
