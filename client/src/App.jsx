@@ -1,7 +1,10 @@
 import './App.css'
+import { useState } from 'react'
 import ListItem from './components/ListItem'
 
 function App() {
+  const [ showList, setShowList ] = useState( true )
+
   const data = [
     {
       id: 1,
@@ -28,19 +31,25 @@ function App() {
       time: "10am"
     }
   ];
+
+  function handleClick() {
+    setShowList( !showList );
+  }
   
   return (
     <>
       <h1>To Do List</h1>
-      <ol>
-        {/* map each task to a ListItem */}
+      <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
+      {
+        showList && 
+        <ol>
         {
           data.map( task => ( <ListItem key={task.id} data={task}/> ))
         }
-        {/* <ListItem data={data[0]}/>
-        <ListItem data={data[1]}/>
-        <ListItem data={data[2]}/> */}
-      </ol>
+        </ol>
+      }
+
+
     </>
   )
 }
