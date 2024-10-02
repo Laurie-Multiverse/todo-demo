@@ -5,6 +5,7 @@ import Form from './components/Form'
 
 function App() {
   const [ showList, setShowList ] = useState( true )
+  const [ showForm, setShowForm ] = useState( false)
 
   const [data, setData] = useState([
     {
@@ -36,12 +37,20 @@ function App() {
   function handleClick() {
     setShowList( !showList );
   }
+
+  function toggleShowForm() {
+    setShowForm( !showForm )
+  }
   
   return (
     <>
       <h1>To Do List</h1>
       <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
-      <Form data={data} setData={setData}/>
+      <button onClick={toggleShowForm}>add new item</button>
+      {
+        showForm &&
+        <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
+      }
       {
         showList && 
         <ol>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Form({data, setData}) {
+function Form({data, setData, toggleShowForm}) {
     const [ title, setTitle ] = useState("");
     const [ description, setDescription ] = useState("");
     const [ time, setTime ] = useState("");
@@ -11,6 +11,12 @@ function Form({data, setData}) {
 
         // data.push(newTask)
         setData([ ...data, newTask]);
+        toggleShowForm();
+
+        // clear out the fields
+        setTitle("");
+        setDescription("");
+        setTime("");
     }
 
     return (
