@@ -1,11 +1,15 @@
+/* eslint-disable */
+
 import './App.css'
 import { useState } from 'react'
 import ListItem from './components/ListItem'
+import Form from './components/Form'
 
 function App() {
   const [ showList, setShowList ] = useState( true )
+  const [ showForm, setShowForm ] = useState( false)
 
-  const data = [
+  const [data, setData] = useState([
     {
       id: 1,
       title: "Have Breakfast",
@@ -30,26 +34,38 @@ function App() {
       description: "mmm good",
       time: "10am"
     }
-  ];
+  ]);
 
   function handleClick() {
     setShowList( !showList );
+  }
+
+  function toggleShowForm() {
+    setShowForm( !showForm )
   }
   
   return (
     <>
       <h1>To Do List</h1>
-      <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
+
       {
-        showList && 
-        <ol>
-        {
-          data.map( task => ( <ListItem key={task.id} data={task}/> ))
-        }
-        </ol>
+        showForm
+        ? <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
+        : (
+          <> {/* Main View */ }
+            <button onClick={toggleShowForm}>add new item</button>
+            <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
+            {
+              showList && 
+              <ol>
+              {
+                data.map( task => ( <ListItem key={task.id} data={task}/> ))
+              }
+              </ol>
+            }
+          </>
+        )
       }
-
-
     </>
   )
 }
