@@ -3,14 +3,21 @@
   background-color:rgb(244, 194, 134);
 }
 
+ol {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .task {
-  border: 5px solid rgb(242, 238, 238);
+  border: 2px solid rgb(242, 238, 238);
   border-radius: 10%;
-  width: 50%;
-  margin: 1em;
-  padding: 1em;
+  width: 12em;
+  height: 9em;
+  margin: 2px;
+  padding: 2px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   background-color:rgb(59, 83, 199);
 }
@@ -18,8 +25,9 @@
 .task * {
   background-color:rgb(59, 83, 199);
   color: rgb(242, 238, 238);
+  text-align: center;
 }
 
-.task p {
-  font-size: larger;
+h2, p {
+  height: 8px;
 }
