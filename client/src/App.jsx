@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import './App.css'
 import { useState } from 'react'
 import ListItem from './components/ListItem'
@@ -45,22 +47,25 @@ function App() {
   return (
     <>
       <h1>To Do List</h1>
-      <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
-      <button onClick={toggleShowForm}>add new item</button>
-      {
-        showForm &&
-        <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
-      }
-      {
-        showList && 
-        <ol>
-        {
-          data.map( task => ( <ListItem key={task.id} data={task}/> ))
-        }
-        </ol>
-      }
 
-
+      {
+        showForm
+        ? <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
+        : (
+          <> {/* Main View */ }
+            <button onClick={toggleShowForm}>add new item</button>
+            <button onClick={handleClick}>{showList ? "Hide" : "Show"} List</button>
+            {
+              showList && 
+              <ol>
+              {
+                data.map( task => ( <ListItem key={task.id} data={task}/> ))
+              }
+              </ol>
+            }
+          </>
+        )
+      }
     </>
   )
 }
