@@ -5,12 +5,17 @@ function Form({data, setData, toggleShowForm}) {
     const [ description, setDescription ] = useState("");
     const [ time, setTime ] = useState("");
 
-    function submitHandler(e) {
+    async function submitHandler(e) {
         e.preventDefault();
         const newTask = {title, description, time};
 
-        // data.push(newTask)
-        setData([ ...data, newTask]);
+        // send (or POST) our new task to the back end
+        await fetch("http://localhost:3000/todos", {
+            method: "POST",
+            body: JSON.stringify(newTask),
+            headers: {'Content-Type': 'application/json'}
+        })
+
         toggleShowForm();
 
         // clear out the fields
