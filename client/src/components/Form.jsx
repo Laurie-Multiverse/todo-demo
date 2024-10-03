@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Form({data, setData, toggleShowForm}) {
+function Form({setNewPost, toggleShowForm}) {
     const [ title, setTitle ] = useState("");
     const [ description, setDescription ] = useState("");
     const [ time, setTime ] = useState("");
@@ -15,6 +15,8 @@ function Form({data, setData, toggleShowForm}) {
             body: JSON.stringify(newTask),
             headers: {'Content-Type': 'application/json'}
         })
+
+        setNewPost(true);
 
         toggleShowForm();
 

@@ -8,6 +8,7 @@ import Form from './components/Form'
 function App() {
   const [ showList, setShowList ] = useState( true )
   const [ showForm, setShowForm ] = useState( false)
+  const [ newPost, setNewPost ] = useState(false)
 
   const [data, setData] = useState([]);
 
@@ -27,7 +28,7 @@ function App() {
 
   // fetchTodos();
   // To fix the problem of each fetch triggering a new update that triggers a new fetch, we need useEffect
-  useEffect( () => { fetchTodos() }, [])
+  useEffect( () => { fetchTodos() }, [newPost])
   
   return (
     <>
@@ -35,7 +36,7 @@ function App() {
 
       {
         showForm
-        ? <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
+        ? <Form setNewPost={setNewPost} toggleShowForm={toggleShowForm} />
         : (
           <> {/* Main View */ }
             <button onClick={toggleShowForm}>add new item</button>
