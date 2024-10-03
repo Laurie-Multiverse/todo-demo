@@ -1,40 +1,16 @@
 /* eslint-disable */
 
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ListItem from './components/ListItem'
 import Form from './components/Form'
 
 function App() {
   const [ showList, setShowList ] = useState( true )
   const [ showForm, setShowForm ] = useState( false)
+  const [ newPost, setNewPost ] = useState(false)
 
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: "Have Breakfast",
-      description: "2 eggs on toast",
-      time: "7am",
-    },
-    {
-      id: 2,
-      title: "Cardio",
-      description: "Jog 5km",
-      time: "8am",
-    },
-    {
-      id: 3,
-      title: "Start Work",
-      description: "Log onto machine and open all relevant software",
-      time: "9am",
-    },
-    {
-      id: 4,
-      title: "Coffee Break",
-      description: "mmm good",
-      time: "10am"
-    }
-  ]);
+  const [data, setData] = useState([]);
 
   function handleClick() {
     setShowList( !showList );
@@ -43,6 +19,16 @@ function App() {
   function toggleShowForm() {
     setShowForm( !showForm )
   }
+
+  async function fetchTodos() {
+    const response = await fetch("http://localhost:3000/todos");
+    const todos = await response.json();
+    setData(todos);
+  }
+
+  // fetchTodos();
+  // To fix the problem of each fetch triggering a new update that triggers a new fetch, we need useEffect
+  useEffect( () => { fetchTodos() }, [newPost])
   
   return (
     <>
@@ -50,7 +36,7 @@ function App() {
 
       {
         showForm
-        ? <Form data={data} setData={setData} toggleShowForm={toggleShowForm} />
+        ? <Form setNewPost={setNewPost} toggleShowForm={toggleShowForm} />
         : (
           <> {/* Main View */ }
             <button onClick={toggleShowForm}>add new item</button>
